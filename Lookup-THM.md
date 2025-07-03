@@ -92,7 +92,7 @@ Dicho binario puede leer el contenido de un archivo con permisos root, con esto 
 \
 sudo /usr/bin/look '' /root/root.txt
 
-El comando look funciona de forma similar a grep, ya que permite buscar texto dentro de archivos, la diferencia principal es que look solo encuentra líneas que comienzan con el texto indicado, mientras que grep puede buscar coincidencias en cualquier parte de la línea, en este caso, se utilizó look con comillas vacías ('') como prefijo, lo que equivale a buscar “nada”, como todas las líneas de un archivo comienzan con una cadena vacía, esto provoca que look muestre todo el contenido del archivo, al ejecutarlo con sudo, fue posible usar este truco para leer el archivo protegido /root/root.txt y obtener la flag de root y completar la maquina Lookout.
+El comando look funciona de forma similar a grep, ya que permite buscar texto dentro de archivos, la diferencia principal es que look solo encuentra líneas que comienzan con el texto indicado, mientras que grep puede buscar coincidencias en cualquier parte de la línea, en este caso, se utilizó look con comillas vacías ('') como prefijo, lo que equivale a buscar “nada”, como todas las líneas de un archivo comienzan con una cadena vacía, esto provoca que look muestre todo el contenido del archivo, al ejecutarlo con sudo, fue posible usar este truco para leer el archivo protegido /root/root.txt y obtener la flag de root y completar la maquina Lookup.
 
 **Nota:**
 

@@ -1,9 +1,9 @@
-# Lookout - TryHackMe
+# Lookup - TryHackMe
 
-Este repositorio documenta el proceso realizado para completar la máquina **Lookout** de la plataforma TryHackMe.
+Este repositorio documenta el proceso realizado para completar la máquina **Lookup** de la plataforma TryHackMe.
 
 🔗 **Puedes ver el proceso completo aquí:**  
-[Ver documento con imagenes](Lookout-THM.md) 
+[Ver documento con imagenes](Lookup-THM.md) 
 
 ---
 
