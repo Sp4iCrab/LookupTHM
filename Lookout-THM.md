@@ -37,11 +37,12 @@ Se obtiene una contraseña, por lo que parecería suficiente probar con admin:pa
 Al intentar iniciar sesión manualmente con admin:password123, el servidor devolvía el mensaje genérico:\
 "Wrong username or password. Please try again."
 
-Esto indicaba que, a pesar de que la contraseña era correcta**,** el** nombre de usuario no lo era, lo curioso es que el sistema devolvía el mismo mensaje de error para cualquier otro usuario diferente de admin, incluso si la contraseña era válida.
+Esto indicaba que, a pesar de que la contraseña era correcta, el nombre de usuario no lo era, lo curioso es que el sistema devolvía el mismo mensaje de error para cualquier otro usuario diferente de admin, incluso si la contraseña era válida.
 
 Por esta razón, fue necesario realizar un segundo ataque de fuerza bruta, esta vez sobre el campo de usuario, utilizando password123 como contraseña fija.
 
 ![](/images/archivo_6.png)
+
 Al ingresar dichas credenciales, se produce un error de conexión, en un principio se pensó que era un fallo de la máquina, pero al revisar la URL se notó una redirección al subdominio files.lookup.thm, el cual no estaba definido en /etc/hosts.
 
 ![](/images/archivo_7.png)
@@ -54,8 +55,7 @@ Al navegar por el explorador en busca de información se encuentra una versión,
 
 Al ejecutar el exploit encontrado y utilizar netcat escuchando en el puerto 5555 en otra terminal, se consigue una reverse shell como www-data, como este usuario prácticamente no tiene muchos permisos, al ir al directorio /home, se encuentra un usuario llamado ‘think’ el mismo que tiene un archivo dentro de ElFinder y ahí se encuentra la flag.txt, pero solo se puede abrir el .txt si somos el usuario think o root.
 
-**find / -perm /4000 2>/dev/null**\
-\
+**find / -perm /4000 2>/dev/null**
 
 
 Se utiliza este comando en busca de SUID’s para escalar privilegios que ayuden a encontrar la manera de ser usuario think o root
@@ -68,7 +68,7 @@ En esta búsqueda se encuentran uno llamado ‘pwm’ el ejecutarlo muestra lo s
 
 Este SUID obtiene el ID del usuario que lo ejecuta y se dirige a su directorio /home en busca de un archivo oculto llamado .passwords, para analizarlo, se utiliza el comando strings sobre pwm, lo que permite observar las cadenas de texto utilizadas internamente por el programa y asi explicar su funcionamiento con ayuda de una inteligencia artificial.
 
-Básicamente, pwm ejecuta el comando id y extrae información como el UID (User ID), GID (Group ID) y, especialmente, el nombre de usuario, que aparece entre paréntesis en la salida de id, a partir de ese nombre, construye una ruta hacia /home/<usuario>/.passwords y trata de leer el contenido del archivo, todo este proceso se realiza con permisos de root, ya que el binario tiene el bit SUID activado.
+Básicamente, pwm ejecuta el comando id y extrae información como el UID (User ID), GID (Group ID) y, especialmente, el nombre de usuario, que aparece entre paréntesis en la salida de id, a partir de ese nombre, construye una ruta hacia /home/usuario/.passwords y trata de leer el contenido del archivo, todo este proceso se realiza con permisos de root, ya que el binario tiene el bit SUID activado.
 
 Con lo explicado anteriormente, se procede a engañar al pwm para que, en lugar de leer el ID del usuario que lo está ejecutando, ejecute un script que simula ser el usuario think, esto es relevante porque think es el usuario que posee la flag de user y además cuenta con un archivo .passwords en su directorio personal.
 
