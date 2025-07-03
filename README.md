@@ -3,7 +3,7 @@
 Este repositorio documenta el proceso realizado para completar la máquina **Lookout** de la plataforma TryHackMe.
 
 🔗 **Puedes ver el proceso completo aquí:**  
-[Link al documento](#) 
+[Link al documento](Lookout-THM.md) 
 
 ---
 
